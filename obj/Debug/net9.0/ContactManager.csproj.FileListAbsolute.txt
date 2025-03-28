@@ -219,3 +219,4 @@
 /Users/braysimic/Desktop/ContactManager/ContactManager/obj/Debug/net9.0/ContactManager.pdb
 /Users/braysimic/Desktop/ContactManager/ContactManager/obj/Debug/net9.0/ContactManager.genruntimeconfig.cache
 /Users/braysimic/Desktop/ContactManager/ContactManager/obj/Debug/net9.0/ref/ContactManager.dll
+/Users/braysimic/Desktop/ContactManager/ContactManager/obj/Debug/net9.0/ContactManager.sourcelink.json

@@ -14,37 +14,30 @@ namespace ContactManager.Controllers
         {
             _context = context;
         }
-
-        // GET: Contacts/Create
         public IActionResult Create()
         {
             ViewBag.Categories = _context.Categories.ToList();
             return View();
         }
 
-        // POST: Contacts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FirstName, LastName, Phone, Email, CategoryId")] Contact contact)
         {
             if (ModelState.IsValid)
             {
-                contact.DateAdded = DateTime.Now;  // Set the current date when adding a contact
+                contact.DateAdded = DateTime.Now;
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(contact);
         }
-
-        // GET: Contacts/Index
         public IActionResult Index()
         {
             var contacts = _context.Contacts.Include(c => c.Category).ToList();
-            return View(contacts);  // Return view with contacts data
+            return View(contacts);
         }
-
-        // GET: Contacts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -116,12 +109,19 @@ namespace ContactManager.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var contact = await _context.Contacts.FindAsync(id);
-            _context.Contacts.Remove(contact);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+{
+    var contact = await _context.Contacts.FindAsync(id);
+    if (contact == null)
+    {
+        // If the contact isn't found, return a NotFound result
+        return NotFound();
+    }
+
+    _context.Contacts.Remove(contact);
+    await _context.SaveChangesAsync();
+    return RedirectToAction(nameof(Index));
+}
+
 
         [HttpGet("api/contacts")]
         public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()

@@ -16,14 +16,11 @@ namespace ContactManager.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            // Seed Category Data
             modelBuilder.Entity<Category>().HasData(
                 new Category { CategoryId = 1, Name = "Family" },
                 new Category { CategoryId = 2, Name = "Friends" },
                 new Category { CategoryId = 3, Name = "Work" }
             );
-
-            // Seed Contact Data
             modelBuilder.Entity<Contact>().HasData(
                 new Contact
                 {
