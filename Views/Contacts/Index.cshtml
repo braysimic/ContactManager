@@ -4,6 +4,10 @@
     ViewData["Title"] = "Contact List";
 }
 
+<div style="background-color: black; color: white; padding: 10px; margin: 20px 0; text-align: center;">
+    <h2>Contact Manager</h2>
+</div>
+
 <h1>@ViewData["Title"]</h1>
 
 <table class="table">
@@ -21,8 +25,12 @@
         @foreach (var contact in Model)
         {
             <tr>
-                <td>@contact.FirstName</td>
-                <td>@contact.LastName</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@contact.ContactId">@contact.FirstName</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@contact.ContactId">@contact.LastName</a>
+                </td>
                 <td>@contact.Phone</td>
                 <td>@contact.Email</td>
                 <td>@contact.Category.Name</td>

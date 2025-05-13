@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kGsHRolZ97o=",
+  "dgSpecHash": "AkBrRqzv3Io=",
   "success": true,
-  "projectFilePath": "/Users/braysimic/Desktop/ContactManager/ContactManager/ContactManager.csproj",
+  "projectFilePath": "/Users/braysimic/Desktop/Enterprise Prog/ContactManager/ContactManager/ContactManager.csproj",
   "expectedPackageFiles": [
     "/Users/braysimic/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/braysimic/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

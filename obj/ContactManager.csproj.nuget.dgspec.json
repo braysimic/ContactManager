@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/braysimic/Desktop/ContactManager/ContactManager/ContactManager.csproj": {}
+    "/Users/braysimic/Desktop/Enterprise Prog/ContactManager/ContactManager/ContactManager.csproj": {}
   },
   "projects": {
-    "/Users/braysimic/Desktop/ContactManager/ContactManager/ContactManager.csproj": {
+    "/Users/braysimic/Desktop/Enterprise Prog/ContactManager/ContactManager/ContactManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/braysimic/Desktop/ContactManager/ContactManager/ContactManager.csproj",
+        "projectUniqueName": "/Users/braysimic/Desktop/Enterprise Prog/ContactManager/ContactManager/ContactManager.csproj",
         "projectName": "ContactManager",
-        "projectPath": "/Users/braysimic/Desktop/ContactManager/ContactManager/ContactManager.csproj",
+        "projectPath": "/Users/braysimic/Desktop/Enterprise Prog/ContactManager/ContactManager/ContactManager.csproj",
         "packagesPath": "/Users/braysimic/.nuget/packages/",
-        "outputPath": "/Users/braysimic/Desktop/ContactManager/ContactManager/obj/",
+        "outputPath": "/Users/braysimic/Desktop/Enterprise Prog/ContactManager/ContactManager/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/braysimic/.nuget/NuGet/NuGet.Config"

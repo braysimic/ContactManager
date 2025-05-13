@@ -1,0 +1,36 @@
+@model ContactManager.Models.Contact
+
+<div style="background-color: black; color: white; padding: 10px; margin: 20px 0; text-align: center;">
+    <h2>Contact Manager</h2>
+</div>
+
+<h3 style="font-weight: 500;">Contact Details</h3>
+
+<table class="table">
+    <tr>
+        <th>First Name:</th>
+        <td>@Model.FirstName</td>
+    </tr>
+    <tr>
+        <th>Last Name:</th>
+        <td>@Model.LastName</td>
+    </tr>
+    <tr>
+        <th>Phone:</th>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <th>Email:</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Category:</th>
+        <td>@Model.Category?.Name</td>
+    </tr>
+    <tr>
+        <th>Date Added:</th>
+        <td>@Model.DateAdded.ToString("g")</td> <!-- Display date and time -->
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-primary">Home</a>

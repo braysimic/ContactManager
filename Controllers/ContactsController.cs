@@ -16,7 +16,7 @@ namespace ContactManager.Controllers
         }
         public IActionResult Create()
         {
-            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Categories = _context.Categories.ToList(); // Ensure this is not null
             return View();
         }
 
@@ -26,11 +26,12 @@ namespace ContactManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                contact.DateAdded = DateTime.Now;
+                contact.DateAdded = DateTime.Now; // Set the DateAdded field
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Categories = _context.Categories.ToList(); // Re-populate ViewBag.Categories if validation fails
             return View(contact);
         }
         public IActionResult Index()
@@ -38,90 +39,71 @@ namespace ContactManager.Controllers
             var contacts = _context.Contacts.Include(c => c.Category).ToList();
             return View(contacts);
         }
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var contact = await _context.Contacts.FindAsync(id);
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Action = "Edit";
+            ViewBag.Categories = _context.Categories.ToList(); // Ensure this is not null
+            var contact = _context.Contacts.Find(id);
             if (contact == null)
             {
                 return NotFound();
             }
-
-            ViewBag.Categories = _context.Categories.ToList();
             return View(contact);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ContactId, FirstName, LastName, Phone, Email, CategoryId")] Contact contact)
+        public IActionResult Edit(Contact contact)
         {
-            if (id != contact.ContactId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                if (contact.ContactId == 0)
                 {
-                    _context.Update(contact);
-                    await _context.SaveChangesAsync();
+                    _context.Contacts.Add(contact);
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!_context.Contacts.Any(e => e.ContactId == contact.ContactId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    _context.Contacts.Update(contact);
                 }
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Categories = _context.Categories.ToList(); // Re-populate ViewBag.Categories if validation fails
             return View(contact);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        [HttpGet]
+        public IActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contact = await _context.Contacts
-                .FirstOrDefaultAsync(m => m.ContactId == id);
+            var contact = _context.Contacts.Include(c => c.Category).FirstOrDefault(c => c.ContactId == id);
             if (contact == null)
             {
                 return NotFound();
             }
-
             return View(contact);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-{
-    var contact = await _context.Contacts.FindAsync(id);
-    if (contact == null)
-    {
-        // If the contact isn't found, return a NotFound result
-        return NotFound();
-    }
+        public IActionResult Delete(Contact contact)
+        {
+            _context.Contacts.Remove(contact);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
 
-    _context.Contacts.Remove(contact);
-    await _context.SaveChangesAsync();
-    return RedirectToAction(nameof(Index));
-}
-
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var contact = _context.Contacts.Include(c => c.Category).FirstOrDefault(c => c.ContactId == id);
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            return View(contact);
+        }
 
         [HttpGet("api/contacts")]
         public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()
